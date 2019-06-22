@@ -5,9 +5,10 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['dashboard'] = "Dashboard";
+		$data['judul'] = "Dashboard";
+		$this->load->view('template/head',$data);
 		$this->load->view('template/header');
-		$this->load->view('home/index',$data);
+		$this->load->view('home/index');
 		$this->load->view('template/footer');
 		
 	}

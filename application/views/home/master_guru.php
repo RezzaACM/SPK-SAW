@@ -1,5 +1,4 @@
 
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -12,17 +11,30 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
+    
+    <?php if($this->session->flashdata('flash')): ?>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Success!</strong> Data guru berhasil <?php echo $this->session->flashdata('flash') ?>
+          </div>
+        </div>
+      </div>
+    <?php endif ?>
+    
+    
 
     <!-- Main content -->
 
     <div class="tombolTambah row">
       <div class="col-md-9 col-sm-9">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah Data Guru</button>
-
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">Tambah Data Guru</button>
       </div>
     </div>
-  <!-- modalBox -->
-  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+  <!-- modalBox tambah data guru-->
+  <div class="modal fade bs-example-modal-lg" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -58,10 +70,9 @@
             <label for="jabatan">Jabatan</label>
             <select class="form-control" name="tugas_jabatan" id="jabatan">
               <option value="">--Pilih Jabatan--</option>
-              <option value="Guru">Guru</option>
-              <option value="Kepala Sekolah">Kepala Sekolah</option>
-              <option value="Wakil Bidang Kesiswaan">Wakil Bidang Kesiswaan</option>
-              <option value="Wakil Bidang Kurikulum">Wakil Bidang Kurikulum</option>
+              <?php foreach ($jabatan as $jab) {?>
+              <option value="<?php echo $jab ?>"><?php echo $jab ?></option>
+             <?php } ?>
             </select>
           </div>
       </div>
@@ -73,6 +84,62 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal Box edit data guru -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Form Tambah Data Guru</h4>
+      </div>
+      <div class="modal-body">
+        <form action="<?php echo base_url('master/tambahDataGuru') ?>" method="post">
+          <input class="form-control" type="hidden" name="id" id="id" placeholder="" hidden="true">
+          <div class="form-group">
+            <label for="nuptk">NUPTK</label>
+            <input class="form-control" type="numeric" name="nuptk" id="nuptk" placeholder="" readonly="">
+          </div>
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input class="form-control" type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap" required="">
+          </div>
+          <div class="form-group">
+            <label for="tempat">Tempat</label>
+            <input class="form-control" type="text" name="tempat" id="tempat" placeholder="Masukkan Tempat Lahir">
+          </div>
+          <div class="form-group">
+            <label for="tanggal">Tanggal Lahir</label>
+            <input class="form-control" type="date" name="tanggal_lahir" id="tanggal">
+          </div>
+          <div class="form-group">
+            <label for="jenis_kelamin">Jenis Kelamin</label>
+            <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" >
+              <option value="">--Pilih Jenis Kelamin--</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="jabatan">Jabatan</label>
+            <select class="form-control" name="tugas_jabatan" id="jabatan">
+              <option value="">--Pilih Jabatan--</option>
+              <?php foreach ($jabatan as $jab) {?>
+              <option value="<?php echo $jab ?>"><?php echo $jab ?></option>
+             <?php } ?>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- /.Modal Box edit data guru -->
+  
 
    <!-- Main content -->
     <section class="content">
@@ -111,7 +178,14 @@
                     <td><?php $date = $row->tanggal_lahir; echo $date;?></td>
                     <td><?php echo $row->jenis_kelamin ?></td>
                     <td><?php echo $row->tugas_jabatan ?></td>
-                    <td><a href=""></a></td>
+                    <td class="text-center"><a onclick="return confirm('Kamu yakin akan menghapus data ini?');" href="<?php echo base_url ('master/hapusDataGuru/'.$row->id) ?>" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> 
+                    &nbsp;<a style="cursor: pointer;" onclick="select_data(
+                      '<?php echo $row->id ?>'
+                      '<?php echo $row->nuptk ?>'
+                      '<?php echo $row->nama ?>'
+                    )" 
+                    data-toggle="modal" data-target="#myModal" title="Sunting" data-id="<?php echo $row->id; ?>" class="glyphicon glyphicon-pencil"></a>
+                    </td>
                   </tr>
                   <?php endforeach; ?>
                 </tbody>

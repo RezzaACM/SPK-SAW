@@ -28,6 +28,17 @@ class Model_Guru extends CI_Model {
 	function ambilDataGuru(){
 		return $this->db->get('master_guru');
 	}
+	function hapus_data_guru($id){
+
+		$this->db->where('id', $id);
+		$this->db->delete('master_guru');
+	}
+	function get_mahasiswa_by_id($id){
+		$this->db->select('*');
+		$this->db->where('id',$id);
+		$res2 = $this->db->get('master_guru');
+		return $res2;
+	}
 
 }
 
