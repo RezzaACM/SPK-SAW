@@ -300,7 +300,7 @@
             <span>Data Master</span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i>Master Guru</a></li>
+            <li><a href="<?php echo base_url('master/guru') ?>"><i class="fa fa-circle-o"></i>Master Guru</a></li>
             <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Master Kriteria</a></li>
           </ul>
         </li>

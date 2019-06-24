@@ -33,11 +33,36 @@ class Model_Guru extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->delete('master_guru');
 	}
-	function get_mahasiswa_by_id($id){
+	function getMahasiswaById($id){
 		$this->db->select('*');
 		$this->db->where('id',$id);
 		$res2 = $this->db->get('master_guru');
-		return $res2;
+		return $res2->result_array() ;
+
+		// return $this->db->get_where('master_guru', ['id => $id'])->result_array();
+	}
+	function  update_data_guru(){
+		$id = $this->input->post('id',true);
+		$nuptk = $this->input->post('nuptk',true);
+		$nama = $this->input->post('nama',true);
+		$tempat = $this->input->post('tempat',true);
+		$tanggal = $this->input->post('tanggal_lahir',true);
+		$jk = $this->input->post('jenis_kelamin',true);
+		$jabatan = $this->input->post('tugas_jabatan',true);
+
+		$data = array (
+			
+			'nuptk' => $nuptk,
+			'nama' => $nama,
+			'tempat' => $tempat,
+			'tanggal_lahir' => $tanggal,
+			'jenis_kelamin' => $jk,
+			'tugas_jabatan' => $jabatan
+
+		);
+
+		$this->db->where('id', $id);
+		$this->db->update('master_guru',$data);
 	}
 
 }

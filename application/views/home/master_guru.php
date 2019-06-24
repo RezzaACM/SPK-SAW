@@ -7,8 +7,8 @@
         Data Guru
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="<?php echo base_url() ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Master Guru</li>
       </ol>
     </section>
     
@@ -88,7 +88,7 @@
 
 <!-- Modal Box edit data guru -->
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel">
+<!-- <div class="modal fade bs-example-modal-lg" tabindex="-1" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -136,7 +136,7 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- /.Modal Box edit data guru -->
   
@@ -179,12 +179,7 @@
                     <td><?php echo $row->jenis_kelamin ?></td>
                     <td><?php echo $row->tugas_jabatan ?></td>
                     <td class="text-center"><a onclick="return confirm('Kamu yakin akan menghapus data ini?');" href="<?php echo base_url ('master/hapusDataGuru/'.$row->id) ?>" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> 
-                    &nbsp;<a style="cursor: pointer;" onclick="select_data(
-                      '<?php echo $row->id ?>'
-                      '<?php echo $row->nuptk ?>'
-                      '<?php echo $row->nama ?>'
-                    )" 
-                    data-toggle="modal" data-target="#myModal" title="Sunting" data-id="<?php echo $row->id; ?>" class="glyphicon glyphicon-pencil"></a>
+                    &nbsp;<a href="<?php echo base_url('master/suntingGuru/'.$row->id) ?>" class="glyphicon glyphicon-pencil"></a>
                     </td>
                   </tr>
                   <?php endforeach; ?>

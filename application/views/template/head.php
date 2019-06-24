@@ -6,6 +6,7 @@
   <title><?php echo $judul ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" href="<?=base_url()?>assets\template\Manual\img\icon.png" type="image/gif">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/template/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
   <!-- Font Awesome -->
@@ -42,3 +43,9 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="<?php echo base_url('') ?>assets/template/AdminLTE/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<style>
+  .form-control{
+    border-radius: 100px;
+  }
+</style>
+<!-- <h1 class="test">TEST</h1> -->

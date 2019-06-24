@@ -32,9 +32,22 @@ class Master extends CI_Controller {
 		$this->session->set_flashdata('flash','Dihapus');
 		redirect('master/guru');
 	}
-	public function getGuruById()
+	public function suntingGuru($id)
 	{
-		
+		$data['jabatan'] = ['Guru','Kepala Sekolah', 'Wakil Bidang Kesiswaan', 'Wakil Bidang Kurikulum'];
+		$data['jenis_klmn'] = ['Laki-laki', 'Perempuan'];
+		$data['judul'] = "Sunting Guru";
+		$data['guru'] = $this->Model_guru->getMahasiswaById($id);
+		$this->load->view('template/head',$data);
+		$this->load->view('template/header');
+		$this->load->view('home/sunting_guru',$data);
+		$this->load->view('template/footer');
+	}
+	public function updateDataGuru()
+	{
+		$this->Model_guru->update_data_guru();
+		$this->session->set_flashdata('flash','Dihapus');
+		redirect('master/guru');
 	}
 
 }
