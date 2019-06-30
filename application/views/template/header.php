@@ -300,8 +300,19 @@
         <li class="">
           <a href="<?php echo base_url('Perhitungan/hasil') ?>">
             <i class="fa fa-tasks"></i>
-            <span>Perhitungan</span>
+            <span>Penilaian Guru</span>
           </a>
+        </li>
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table"></i>
+            <span>Hasil Analisa</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo base_url('') ?>"><i class="fa fa-circle-o"></i>Tabel Penilaian</a></li>
+            <li><a href="<?php echo base_url('') ?>"><i class="fa fa-circle-o"></i>Tabel Rating Kecocokan</a></li>
+            <li><a href="<?php echo base_url('') ?>"><i class="fa fa-circle-o"></i>Tabel Normalisasi</a></li>
+          </ul>
         </li>
         <li>
           <a href="<?php echo base_url('login_auth/logout') ?>">
@@ -309,6 +320,7 @@
             Logout
           </a>
         </li>
+
        
     </section>
     <!-- /.sidebar -->

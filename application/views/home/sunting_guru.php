@@ -20,7 +20,7 @@
 			<div class="row">
 				<div class="col-md-10">
 					<div class="form-group">
-			            <input type="hidden" min=0 class="form-control" name="id" id="nuptk" value="<?php echo $row['id'] ?>" readonly="">
+			            <input type="hidden" min=0 class="form-control" name="id" id="nuptk" value="<?php echo $row['id_guru'] ?>" readonly="">
 			        </div>
 				</div>
 			</div>

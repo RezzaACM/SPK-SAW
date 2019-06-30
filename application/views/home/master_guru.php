@@ -95,7 +95,7 @@
         <h4>Form Tambah Data Guru</h4>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url('master/tambahDataGuru') ?>" method="post">
+        <form action=" method="post">
           <input class="form-control" type="hidden" name="id" id="id" placeholder="" hidden="true">
           <div class="form-group">
             <label for="nuptk">NUPTK</label>
@@ -123,9 +123,7 @@
             <label for="jabatan">Jabatan</label>
             <select class="form-control" name="tugas_jabatan" id="jabatan">
               <option value="">--Pilih Jabatan--</option>
-              <?php foreach ($jabatan as $jab) {?>
-              <option value="<?php echo $jab ?>"><?php echo $jab ?></option>
-             <?php } ?>
+             
             </select>
           </div>
       </div>
@@ -178,8 +176,8 @@
                     <td><?php $date = $row->tanggal_lahir; echo $date;?></td>
                     <td><?php echo $row->jenis_kelamin ?></td>
                     <td><?php echo $row->tugas_jabatan ?></td>
-                    <td class="text-center"><a onclick="return confirm('Kamu yakin akan menghapus data ini?');" href="<?php echo base_url ('master/hapusDataGuru/'.$row->id) ?>" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> 
-                    &nbsp;<a href="<?php echo base_url('master/suntingGuru/'.$row->id) ?>" class="glyphicon glyphicon-pencil"></a>
+                    <td class="text-center"><a onclick="return confirm('Kamu yakin akan menghapus data ini?');" href="<?php echo base_url ('master/hapusDataGuru/'.$row->id_guru) ?>" title="Hapus"><i class="glyphicon glyphicon-trash"></i></a> 
+                    &nbsp;<a href="<?php echo base_url('master/suntingGuru/'.$row->id_guru) ?>" class="glyphicon glyphicon-pencil"></a>
                     </td>
                   </tr>
                   <?php endforeach; ?>

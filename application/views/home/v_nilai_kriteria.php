@@ -15,7 +15,7 @@
         <div class="col-md-8 col-md-offset-2 text-center">
           <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Success!</strong> Kriteria berhasil <?php echo $this->session->flashdata('flash') ?>
+            <strong>Success!</strong> Subkriteria berhasil <?php echo $this->session->flashdata('flash') ?>
           </div>
         </div>
       </div>
@@ -35,8 +35,8 @@
                 	<td><?php echo $i++ ?></td>
                 	<td><?php echo $rows['nama_kriteria'] ?></td>
                 	<td class="text-justify"><?php echo $rows['subkriteria'] ?></td>
-                	<td class="text-center"><a href="<?php echo base_url('Master_kriteria/editKriteria/'.$rows['id']) ?>"><span class="label label-warning">Edit</span></a>
-                    <a onclick="return confirm ('Yakin Mengapus Data?')" href="<?php echo base_url('Master_kriteria/hapusKriteria/'.$rows['id']) ?>"><span class="label label-danger">Hapus</span></a>
+                	<td class="text-center"><a href="<?php echo base_url('Master_kriteria/edit_sub_kriteria)/'.$rows['id_sub']) ?>"><span class="label label-warning">Edit</span></a>
+                    <a onclick="return confirm ('Yakin Mengapus Data?')" href="<?php echo base_url('Nilai_kriteria/hapus_data_sub/'.$rows['id_sub']) ?>"><span class="label label-danger">Hapus</span></a>
                   </td>
 
                 </tr>
@@ -62,7 +62,7 @@
                 <label for="kriteria">Nama Kriteria</label>
                 <select name="id_kriteria" class="form-control" id="kriteria">
                   <?php foreach ($kriteria as $k): ?>
-                    <option value="<?php echo $k['id'] ?>"><?php echo $k['nama_kriteria'] ?></option>
+                    <option value="<?php echo $k['id_kriteria'] ?>"><?php echo $k['nama_kriteria'] ?></option>
                   <?php endforeach ?>
                 </select>
               </div>

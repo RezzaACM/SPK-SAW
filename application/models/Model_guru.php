@@ -28,21 +28,21 @@ class Model_Guru extends CI_Model {
 	function ambilDataGuru(){
 		return $this->db->get('master_guru');
 	}
-	function hapus_data_guru($id){
+	function hapus_data_guru($id_guru){
 
-		$this->db->where('id', $id);
+		$this->db->where('id_guru', $id_guru);
 		$this->db->delete('master_guru');
 	}
-	function getMahasiswaById($id){
+	function getMahasiswaById($id_guru){
 		$this->db->select('*');
-		$this->db->where('id',$id);
+		$this->db->where('id_guru',$id_guru);
 		$res2 = $this->db->get('master_guru');
 		return $res2->result_array() ;
 
 		// return $this->db->get_where('master_guru', ['id => $id'])->result_array();
 	}
 	function  update_data_guru(){
-		$id = $this->input->post('id',true);
+		$id = $this->input->post('id_guru',true);
 		$nuptk = $this->input->post('nuptk',true);
 		$nama = $this->input->post('nama',true);
 		$tempat = $this->input->post('tempat',true);
@@ -61,7 +61,7 @@ class Model_Guru extends CI_Model {
 
 		);
 
-		$this->db->where('id', $id);
+		$this->db->where('id_guru', $id);
 		$this->db->update('master_guru',$data);
 	}
 

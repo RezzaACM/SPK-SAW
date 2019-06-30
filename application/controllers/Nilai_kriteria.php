@@ -26,6 +26,16 @@ class Nilai_kriteria extends CI_Controller {
 		$this->session->set_flashdata('flash', 'ditambahkan!');
 		redirect('Nilai_kriteria/nilai');
 	}
+	// public function hapus_data_sub($id){
+	// 	$this->M_subkriteria->hapusDataSub($id);
+	// 	$this->session->set_flashdata('flash', 'dihapus!');
+	// 	redirect('Nilai_kriteria/nilai');
+	// }
+	public function hapus_data_sub($id_sub){
+		$this->M_subkriteria->hapusDataSub($id_sub);
+				$this->session->set_flashdata('flash', 'dihapus!');
+		redirect('Nilai_kriteria/nilai');
+	}
 
 }
 

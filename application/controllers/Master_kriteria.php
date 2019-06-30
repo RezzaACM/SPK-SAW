@@ -32,10 +32,15 @@ class Master_kriteria extends CI_Controller {
 		$this->load->view('home/v_edit_kriteria');
 		$this->load->view('template/footer');
 	}
-	public function hapusKriteria($id){
-		$this->M_kriteria->hapus_kriteria($id);
+	public function hapusKriteria($id_kriteria){
+		$this->M_kriteria->hapus_kriteria($id_kriteria);
 		$this->session->set_flashdata('flash', 'dihapus!');
 		redirect('Master_kriteria/kriteria','refresh');
+	}
+	public function updateKriteria2(){
+		$this->M_kriteria->update_kriteria();
+		$this->session->set_flashdata('flash','Diupdate!');
+		redirect('Master_kriteria/kriteria');
 	}
 
 }

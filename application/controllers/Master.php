@@ -26,18 +26,18 @@ class Master extends CI_Controller {
 		$this->session->set_flashdata('flash','Ditambahkan');
 		redirect('master/guru');
 	}
-	public function hapusDataGuru($id)
+	public function hapusDataGuru($id_guru)
 	{
-		$this->Model_guru->hapus_data_guru($id);
+		$this->Model_guru->hapus_data_guru($id_guru);
 		$this->session->set_flashdata('flash','Dihapus');
 		redirect('master/guru');
 	}
-	public function suntingGuru($id)
+	public function suntingGuru($id_guru)
 	{
 		$data['jabatan'] = ['Guru','Kepala Sekolah', 'Wakil Bidang Kesiswaan', 'Wakil Bidang Kurikulum'];
 		$data['jenis_klmn'] = ['Laki-laki', 'Perempuan'];
 		$data['judul'] = "Sunting Guru";
-		$data['guru'] = $this->Model_guru->getMahasiswaById($id);
+		$data['guru'] = $this->Model_guru->getMahasiswaById($id_guru);
 		$this->load->view('template/head',$data);
 		$this->load->view('template/header');
 		$this->load->view('home/sunting_guru',$data);
@@ -46,7 +46,7 @@ class Master extends CI_Controller {
 	public function updateDataGuru()
 	{
 		$this->Model_guru->update_data_guru();
-		$this->session->set_flashdata('flash','Dihapus');
+		$this->session->set_flashdata('flash','Diupdate!');
 		redirect('master/guru');
 	}
 
