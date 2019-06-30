@@ -82,9 +82,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
   <div class="login">
 	<h1>Login Admin</h1>
-    <form method="post">
-    	<input type="text" name="u" placeholder="Username" required="required" />
-        <input type="password" name="p" placeholder="Password" required="required" />
+	<?php if ($this->session->flashdata('flash')): ?>
+		<span style="color: red;"><?php echo $this->session->flashdata('flash'); ?></span>
+	<?php endif ?>
+	
+    <form method="post" action="<?php echo base_url('login_auth/loginAct') ?>">
+    	<input type="text" name="email" placeholder="Email" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
         <button type="submit" class="btn btn-primary btn-block btn-large">Login</button>
     </form>
 </div>

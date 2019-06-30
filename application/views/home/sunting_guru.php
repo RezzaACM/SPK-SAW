@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 	<section style="min-height: 100px;" class="content-header">
-      <h1 class="test">
+      <h1 class="">
         Sunting Data Guru
       </h1>
       <ol class="breadcrumb">
@@ -87,6 +87,8 @@
 			<div class="row">
 				<div class=" col-md-10 col-sm-12">
 					<button type="submit" class="btn btn-primary" style="float: right; border-radius: 10px; width: 100px;">Update</button>
+					<a type="button" class="btn btn-danger" style="float: right; margin-right: 10px; background: red; color: white; border-radius: 70px;" href="<?php echo base_url('') ?>Master/guru">Kembali</a>
+
 				</div>
 			</div>
 		</div>

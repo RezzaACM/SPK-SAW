@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jun 2019 pada 18.02
--- Versi server: 10.1.35-MariaDB
--- Versi PHP: 7.2.9
+-- Waktu pembuatan: 30 Jun 2019 pada 12.46
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,15 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_admin`
+-- Struktur dari tabel `admin`
 --
 
-CREATE TABLE `master_admin` (
+CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `email`, `password`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -51,65 +58,61 @@ CREATE TABLE `master_guru` (
   `tugas_jabatan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `master_kriteria_absensi`
+-- Dumping data untuk tabel `master_guru`
 --
 
-CREATE TABLE `master_kriteria_absensi` (
-  `id` int(11) NOT NULL,
-  `nama_kriteria` varchar(20) NOT NULL,
-  `bobot_kriteria` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `master_guru` (`id`, `nuptk`, `nama`, `tempat`, `tanggal_lahir`, `jenis_kelamin`, `tugas_jabatan`) VALUES
+(24, 1, 'Funky Reza', 'Tangerang Selatan', '0199-07-12', 'Laki-laki', 'Guru'),
+(25, 5, 'Funky Reza', 'Tangerang Selatan', '1990-12-12', 'Laki-laki', 'Kepala Sekolah');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_kriteria_kepribadian`
+-- Struktur dari tabel `master_kriteria`
 --
 
-CREATE TABLE `master_kriteria_kepribadian` (
+CREATE TABLE `master_kriteria` (
   `id` int(11) NOT NULL,
   `nama_kriteria` varchar(30) NOT NULL,
-  `bobot_kriteria` double NOT NULL
+  `bobot` float NOT NULL,
+  `attribute_kriteria` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `master_kriteria`
+--
+
+INSERT INTO `master_kriteria` (`id`, `nama_kriteria`, `bobot`, `attribute_kriteria`) VALUES
+(2, 'Kompetensi Pedadogik', 0.3, 'Benefit'),
+(3, 'Absensi', 0.1, 'Benefit'),
+(4, 'Kompetensi Kepribadian', 0.3, 'Benefit'),
+(5, 'Kompetensi Sosial', 0.2, 'Benefit'),
+(6, 'Kompetensi Keahlian', 0.3, 'Benefit');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_kriteria_pedagogik`
+-- Struktur dari tabel `master_subkriteria`
 --
 
-CREATE TABLE `master_kriteria_pedagogik` (
+CREATE TABLE `master_subkriteria` (
   `id` int(11) NOT NULL,
-  `nama_kriteria` int(11) NOT NULL,
-  `bobot_kriteria` double NOT NULL
+  `id_kriteria` int(11) NOT NULL,
+  `subkriteria` varchar(300) NOT NULL,
+  `nilai_sub` float NOT NULL,
+  `bobot_sub` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `master_kriteria_profesional`
+-- Dumping data untuk tabel `master_subkriteria`
 --
 
-CREATE TABLE `master_kriteria_profesional` (
-  `id` int(11) NOT NULL,
-  `nama_kriteria` varchar(30) NOT NULL,
-  `bobot_kriteria` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `master_kriteria_sosial`
---
-
-CREATE TABLE `master_kriteria_sosial` (
-  `id` int(11) NOT NULL,
-  `nama_kriteria` varchar(30) NOT NULL,
-  `bobot_kriteria` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `master_subkriteria` (`id`, `id_kriteria`, `subkriteria`, `nilai_sub`, `bobot_sub`) VALUES
+(2, 3, 'Absensi', 0, 0),
+(3, 3, 'Keterlambatan', 0, 0),
+(4, 2, 'Guru memberikan pembelaja', 0, 0),
+(5, 5, 'Guru memperlakukan semua peserta didik secara adil, memberikan perhatian dan bantuan sesuai dengan kebutuhan masing - masing tanpa memperdulikan perso', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -119,12 +122,9 @@ CREATE TABLE `master_kriteria_sosial` (
 
 CREATE TABLE `transaksi_nilai` (
   `id` int(11) NOT NULL,
-  `id_guru_fk` int(11) NOT NULL,
-  `c1_fk` int(11) NOT NULL,
-  `c2_fk` int(11) NOT NULL,
-  `c3_fk` int(11) NOT NULL,
-  `c4_fk` int(11) NOT NULL,
-  `c5_fk` int(11) NOT NULL
+  `id_guru` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `penilaian` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -132,9 +132,9 @@ CREATE TABLE `transaksi_nilai` (
 --
 
 --
--- Indeks untuk tabel `master_admin`
+-- Indeks untuk tabel `admin`
 --
-ALTER TABLE `master_admin`
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -144,98 +144,53 @@ ALTER TABLE `master_guru`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `master_kriteria_absensi`
+-- Indeks untuk tabel `master_kriteria`
 --
-ALTER TABLE `master_kriteria_absensi`
+ALTER TABLE `master_kriteria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `master_subkriteria`
+--
+ALTER TABLE `master_subkriteria`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`),
-  ADD KEY `id_2` (`id`);
-
---
--- Indeks untuk tabel `master_kriteria_kepribadian`
---
-ALTER TABLE `master_kriteria_kepribadian`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `master_kriteria_pedagogik`
---
-ALTER TABLE `master_kriteria_pedagogik`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
-
---
--- Indeks untuk tabel `master_kriteria_profesional`
---
-ALTER TABLE `master_kriteria_profesional`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `master_kriteria_sosial`
---
-ALTER TABLE `master_kriteria_sosial`
-  ADD PRIMARY KEY (`id`);
+  ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
 -- Indeks untuk tabel `transaksi_nilai`
 --
 ALTER TABLE `transaksi_nilai`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`),
-  ADD KEY `c1_fk` (`c1_fk`),
-  ADD KEY `c1_fk_2` (`c1_fk`),
-  ADD KEY `c2_fk` (`c2_fk`),
-  ADD KEY `id_2` (`id`),
-  ADD KEY `c3_fk` (`c3_fk`),
-  ADD KEY `c4_fk` (`c4_fk`),
-  ADD KEY `c5_fk` (`c5_fk`),
-  ADD KEY `id_guru_fk` (`id_guru_fk`);
+  ADD KEY `id_guru` (`id_guru`,`id_kriteria`),
+  ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT untuk tabel `master_admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
-ALTER TABLE `master_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_guru`
 --
 ALTER TABLE `master_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `master_kriteria_absensi`
+-- AUTO_INCREMENT untuk tabel `master_kriteria`
 --
-ALTER TABLE `master_kriteria_absensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `master_kriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `master_kriteria_kepribadian`
+-- AUTO_INCREMENT untuk tabel `master_subkriteria`
 --
-ALTER TABLE `master_kriteria_kepribadian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `master_kriteria_pedagogik`
---
-ALTER TABLE `master_kriteria_pedagogik`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `master_kriteria_profesional`
---
-ALTER TABLE `master_kriteria_profesional`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `master_kriteria_sosial`
---
-ALTER TABLE `master_kriteria_sosial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `master_subkriteria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi_nilai`
@@ -248,15 +203,17 @@ ALTER TABLE `transaksi_nilai`
 --
 
 --
+-- Ketidakleluasaan untuk tabel `master_subkriteria`
+--
+ALTER TABLE `master_subkriteria`
+  ADD CONSTRAINT `master_subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `transaksi_nilai`
 --
 ALTER TABLE `transaksi_nilai`
-  ADD CONSTRAINT `transaksi_nilai_ibfk_1` FOREIGN KEY (`c1_fk`) REFERENCES `master_kriteria_absensi` (`id`),
-  ADD CONSTRAINT `transaksi_nilai_ibfk_2` FOREIGN KEY (`c2_fk`) REFERENCES `master_kriteria_pedagogik` (`id`),
-  ADD CONSTRAINT `transaksi_nilai_ibfk_3` FOREIGN KEY (`c3_fk`) REFERENCES `master_kriteria_kepribadian` (`id`),
-  ADD CONSTRAINT `transaksi_nilai_ibfk_4` FOREIGN KEY (`c4_fk`) REFERENCES `master_kriteria_sosial` (`id`),
-  ADD CONSTRAINT `transaksi_nilai_ibfk_5` FOREIGN KEY (`c5_fk`) REFERENCES `master_kriteria_profesional` (`id`),
-  ADD CONSTRAINT `transaksi_nilai_ibfk_6` FOREIGN KEY (`id_guru_fk`) REFERENCES `master_guru` (`id`);
+  ADD CONSTRAINT `transaksi_nilai_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `master_guru` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_nilai_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
