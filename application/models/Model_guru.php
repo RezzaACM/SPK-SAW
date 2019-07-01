@@ -26,6 +26,7 @@ class Model_Guru extends CI_Model {
 	}
 
 	function ambilDataGuru(){
+		$this->db->order_by('nama', 'ASC');
 		return $this->db->get('master_guru');
 	}
 	function hapus_data_guru($id_guru){

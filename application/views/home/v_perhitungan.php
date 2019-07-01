@@ -27,15 +27,37 @@
 				                <tr>
 				                  <th>No.</th>
 				                  <th>Nama Guru</th>
-				         		  <?php $i=1;foreach ($kriteria as $k): ?>
+				         		  <?php $i=1;
+                      foreach ($kriteria as $k): ?>
 				         		  	<th><?php echo $k['nama_kriteria']; echo (' (C'.$i++.')')?></th>
-				         		  <?php endforeach ?>
+				         		  <?php endforeach; ?>
 				                </tr>
                       </thead>
-                      <?php var_dump($dataJoin[0]['id']) ?>
-                      <tr>
-                        <td><?php echo $dataJoin[0]['penilaian'] ?></td>
-                      </tr>
+                      
+                     
+                       <tbody>
+                         <?php $i=1; 
+                      foreach ($dataGuru as $rows): ?>
+                         <tr>
+                           <td><?php echo $i++ ?></td>
+                           <td><?php echo $rows['nama'] ?></td>
+                         <?php foreach ($kriteria as $k) :?>
+
+                          <?php $data =  $this->M_perhitungan->getTripleData(($rows['nama']),$k['id_kriteria'])->result_array(); ?>
+                          <td>
+                            <?php if (isset($data[0]['penilaian'])) {
+                              echo $data[0]['penilaian'];
+                              // var_dump($data[0]['penilaian']);
+                            } else {
+                              echo "";
+                            } ?>
+                          </td>
+                           <?php endforeach; ?>
+                         </tr>
+                         <?php endforeach; ?>
+                       </tbody>
+                       
+                      
 		            	</table>
 		       		</div>
 		    	</div>

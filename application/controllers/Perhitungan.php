@@ -14,7 +14,7 @@ class Perhitungan extends CI_Controller {
 
 	public function hasil()
 	{
-		$data['dataJoin'] = $this->M_perhitungan->getTripleData()->result_array();
+		// $data['dataJoin'] = $this->M_perhitungan->getTripleData()->result_array();
 		$data['dataGuru'] = $this->Model_guru->ambilDataGuru()->result_array();
 		$data['kriteria'] = $this->M_kriteria->getKriteria()->result_array();
 		$data['judul'] = "Perhitungan";
