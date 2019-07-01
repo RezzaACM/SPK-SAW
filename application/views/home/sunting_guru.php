@@ -15,12 +15,12 @@
     	
     } ?>
 	<?php foreach($guru as $row){ ?>
-	<form action="<?php echo base_url() ?>master/updateDataGuru" method="post">
+	<form action="<?php echo base_url('master/updateDataGuru/'.$row['id_guru']) ?>" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
 					<div class="form-group">
-			            <input type="hidden" min=0 class="form-control" name="id" id="nuptk" value="<?php echo $row['id_guru'] ?>" readonly="">
+			            <input type="hidden" min=0 class="form-control" name="id_guru" id="nuptk" value="<?php echo $row['id_guru'] ?>" readonly="">
 			        </div>
 				</div>
 			</div>

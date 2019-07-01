@@ -49,7 +49,7 @@ INSERT INTO `admin` (`id`, `nama`, `email`, `password`) VALUES
 --
 
 CREATE TABLE `master_guru` (
-  `id` int(11) NOT NULL,
+  `id_guru` int(11) NOT NULL,
   `nuptk` int(11) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `tempat` varchar(20) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `master_guru` (
 -- Dumping data untuk tabel `master_guru`
 --
 
-INSERT INTO `master_guru` (`id`, `nuptk`, `nama`, `tempat`, `tanggal_lahir`, `jenis_kelamin`, `tugas_jabatan`) VALUES
+INSERT INTO `master_guru` (`id_guru`, `nuptk`, `nama`, `tempat`, `tanggal_lahir`, `jenis_kelamin`, `tugas_jabatan`) VALUES
 (24, 1, 'Funky Reza', 'Tangerang Selatan', '0199-07-12', 'Laki-laki', 'Guru'),
 (25, 5, 'Funky Reza', 'Tangerang Selatan', '1990-12-12', 'Laki-laki', 'Kepala Sekolah');
 
@@ -73,7 +73,7 @@ INSERT INTO `master_guru` (`id`, `nuptk`, `nama`, `tempat`, `tanggal_lahir`, `je
 --
 
 CREATE TABLE `master_kriteria` (
-  `id` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
   `nama_kriteria` varchar(30) NOT NULL,
   `bobot` float NOT NULL,
   `attribute_kriteria` varchar(10) NOT NULL
@@ -83,7 +83,7 @@ CREATE TABLE `master_kriteria` (
 -- Dumping data untuk tabel `master_kriteria`
 --
 
-INSERT INTO `master_kriteria` (`id`, `nama_kriteria`, `bobot`, `attribute_kriteria`) VALUES
+INSERT INTO `master_kriteria` (`id_kriteria`, `nama_kriteria`, `bobot`, `attribute_kriteria`) VALUES
 (2, 'Kompetensi Pedadogik', 0.3, 'Benefit'),
 (3, 'Absensi', 0.1, 'Benefit'),
 (4, 'Kompetensi Kepribadian', 0.3, 'Benefit'),
@@ -97,7 +97,7 @@ INSERT INTO `master_kriteria` (`id`, `nama_kriteria`, `bobot`, `attribute_kriter
 --
 
 CREATE TABLE `master_subkriteria` (
-  `id` int(11) NOT NULL,
+  `id_sub` int(11) NOT NULL,
   `id_kriteria` int(11) NOT NULL,
   `subkriteria` varchar(300) NOT NULL,
   `nilai_sub` float NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `master_subkriteria` (
 -- Dumping data untuk tabel `master_subkriteria`
 --
 
-INSERT INTO `master_subkriteria` (`id`, `id_kriteria`, `subkriteria`, `nilai_sub`, `bobot_sub`) VALUES
+INSERT INTO `master_subkriteria` (`id_sub`, `id_kriteria`, `subkriteria`, `nilai_sub`, `bobot_sub`) VALUES
 (2, 3, 'Absensi', 0, 0),
 (3, 3, 'Keterlambatan', 0, 0),
 (4, 2, 'Guru memberikan pembelaja', 0, 0),
@@ -141,19 +141,19 @@ ALTER TABLE `admin`
 -- Indeks untuk tabel `master_guru`
 --
 ALTER TABLE `master_guru`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_guru`);
 
 --
 -- Indeks untuk tabel `master_kriteria`
 --
 ALTER TABLE `master_kriteria`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_kriteria`);
 
 --
 -- Indeks untuk tabel `master_subkriteria`
 --
 ALTER TABLE `master_subkriteria`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_sub`),
   ADD KEY `id_kriteria` (`id_kriteria`);
 
 --
@@ -178,19 +178,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `master_guru`
 --
 ALTER TABLE `master_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_kriteria`
 --
 ALTER TABLE `master_kriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `master_subkriteria`
 --
 ALTER TABLE `master_subkriteria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `transaksi_nilai`
@@ -206,14 +206,14 @@ ALTER TABLE `transaksi_nilai`
 -- Ketidakleluasaan untuk tabel `master_subkriteria`
 --
 ALTER TABLE `master_subkriteria`
-  ADD CONSTRAINT `master_subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `master_subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `transaksi_nilai`
 --
 ALTER TABLE `transaksi_nilai`
-  ADD CONSTRAINT `transaksi_nilai_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `master_guru` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaksi_nilai_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `transaksi_nilai_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `master_guru` (`id_guru`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaksi_nilai_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `master_kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

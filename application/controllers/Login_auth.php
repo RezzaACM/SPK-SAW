@@ -36,8 +36,11 @@ class Login_auth extends CI_Controller {
 					$this->session->set_userdata( $session_data );
 					// $this->session->set_flashdata('flash');
 					redirect( base_url(''));
-				}	
-		}
+				}
+			}else {
+				redirect('Login_auth/login');
+			}
+
 	}
 	public function logout(){
 		$this->session->sess_destroy();

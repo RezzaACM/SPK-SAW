@@ -31,7 +31,11 @@
 				         		  	<th><?php echo $k['nama_kriteria']; echo (' (C'.$i++.')')?></th>
 				         		  <?php endforeach ?>
 				                </tr>
-			                </thead>
+                      </thead>
+                      <?php var_dump($dataJoin[0]['id']) ?>
+                      <tr>
+                        <td><?php echo $dataJoin[0]['penilaian'] ?></td>
+                      </tr>
 		            	</table>
 		       		</div>
 		    	</div>

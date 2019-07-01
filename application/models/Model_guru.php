@@ -42,7 +42,8 @@ class Model_Guru extends CI_Model {
 		// return $this->db->get_where('master_guru', ['id => $id'])->result_array();
 	}
 	function  update_data_guru(){
-		$id = $this->input->post('id_guru',true);
+
+		$id_guru = $this->input->post('id_guru');
 		$nuptk = $this->input->post('nuptk',true);
 		$nama = $this->input->post('nama',true);
 		$tempat = $this->input->post('tempat',true);
@@ -61,7 +62,7 @@ class Model_Guru extends CI_Model {
 
 		);
 
-		$this->db->where('id_guru', $id);
+		$this->db->where('id_guru', $id_guru);
 		$this->db->update('master_guru',$data);
 	}
 
