@@ -19,6 +19,16 @@
 				<div class="box">
 		            <div class="box-header">
 		              <h3 class="box-title">Data Penilaian Guru</h3>
+                  <?php if($this->session->flashdata('flash')): ?>
+                  <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                      <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Success!</strong> Data guru berhasil <?php echo $this->session->flashdata('flash') ?>
+                      </div>
+                    </div>
+                  </div>
+                <?php endif ?>
 		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body">
@@ -76,45 +86,24 @@
         <h4>Form Penilaian</h4>
       </div>
       <div class="modal-body">
-        <form action="<?php echo base_url('master/tambahDataGuru') ?>" method="post">
+        <form action="<?php echo base_url('perhitungan/nilai_guru') ?>" method="post">
           <div class="form-group">
             <label for="nama">Nama Guru</label>
-            <select name="nama" id="nama" class="form-control">
+            <select name="id_guru" id="nama" class="form-control">
             	<?php foreach ($dataGuru as $data): ?>
-            		<option value=""><?php echo $data['nama'] ?></option>
+            		<option value="<?php echo $data['id_guru'] ?>"><?php echo $data['nama'] ?></option>
             	<?php endforeach ?>
             	
             </select>
           </div>
-          <div class="form-group">
-            <label for="nama">Absensi</label>
-            <input class="form-control" type="text" name="nama" id="nama" placeholder="Masukkan Nama Lengkap" required="">
+          <?php foreach ($kriteria as $k): ?>
+            <div class="form-group">
+            <label for="nama"><?php echo $k['nama_kriteria'] ?></label>
+
+            <input class="form-control" type="text" name="penilaian" id="" placeholder="Masukkan Nama Lengkap" required="">
           </div>
-          <div class="form-group">
-            <label for="tempat">Kompetensi Keahlian</label>
-            <input class="form-control" type="text" name="tempat" id="tempat" placeholder="Masukkan Tempat Lahir">
-          </div>
-          <div class="form-group">
-            <label for="tanggal">Kompetensi Pedadogik</label>
-            <input class="form-control" type="date" name="tanggal_lahir" id="tanggal">
-          </div>
-          <div class="form-group">
-            <label for="jenis_kelamin">Kompetensi Sosial</label>
-            <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-              <option value="">--Pilih Jenis Kelamin--</option>
-              <option value="Laki-laki">Laki - laki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="jabatan">Jabatan</label>
-            <select class="form-control" name="tugas_jabatan" id="jabatan">
-              <option value="">--Pilih Jabatan--</option>
-              <?php foreach ($jabatan as $jab) {?>
-              <option value="<?php echo $jab ?>"><?php echo $jab ?></option>
-             <?php } ?>
-            </select>
-          </div>
+          <?php endforeach ?>
+          
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

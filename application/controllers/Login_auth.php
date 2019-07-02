@@ -34,7 +34,7 @@ class Login_auth extends CI_Controller {
 
 					);
 					$this->session->set_userdata( $session_data );
-					// $this->session->set_flashdata('flash');
+					$this->session->set_flashdata('flash', 'login!');
 					redirect( base_url(''));
 				}
 			}else {
@@ -44,6 +44,7 @@ class Login_auth extends CI_Controller {
 	}
 	public function logout(){
 		$this->session->sess_destroy();
+		$this->session->set_flashdata('flasher', 'logout!');
 		redirect('Login_auth/login');
 	}
 
